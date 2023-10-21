@@ -31,6 +31,7 @@ IPInfoFilter は、AbuseFilterと連携し、IPアドレスから得られる情
 | `$wgIPInfoFilterGeoLite2CountryPath ` | GeoLite2-Country.mmdb データベースへのパス | `'/var/www/GeoLite2/GeoLite2-Country.mmdb'` |
 | `$wgIPInfoFilterProxyCheckIoKey`      | proxycheck\.io のAPIキー            | `'your-api-key-here'`                       |
 
+
 GeoLite2　と　ProxyCheck.io　の両方の設定が行われている場合、GeoLite2 が優先されます。
 
 
@@ -83,10 +84,11 @@ $wgIPInfoFilterProxyCheckIoKey = "your-api-key-here";
 
 | 変数名 | 説明 | 例 | サービス |
 | ------ | ---- | --- | ------- |
-| `ipinfo_country` | IP アドレスに基づいた国の ISO 3166-1 コード | `JA` | GeoLite2, ProxyCheck.io |
+| `ipinfo_country` | IP アドレスに基づいた国の ISO 3166-1 コード | `JP` | GeoLite2, ProxyCheck.io |
 | `ipinfo_asn` | IP アドレスの AS 番号（ASN） | `234` | GeoLite2, ProxyCheck.io |
 | `ipinfo_risk` | IP アドレスのリスクスコア（0から100） | `60` | ProxyCheck.io |
 | `ipinfo_proxy` | IP アドレスがプロキシかどうか（true/false） | `true` | ProxyCheck.io |
+
 データソースによって、利用できる変数が制限されます。
 
 ### 使用例
