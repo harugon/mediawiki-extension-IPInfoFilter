@@ -1,0 +1,12 @@
+{
+  "@metadata": {
+    "authors": [
+      "harugon"
+    ]
+  },
+  "abusefilter-edit-builder-vars-ipinfo-service": "IPInfo - サービス",
+  "abusefilter-edit-builder-vars-ipinfo-asn": "IPInfo - AS番号",
+  "abusefilter-edit-builder-vars-ipinfo-country": "IPInfo - 国名コード",
+  "abusefilter-edit-builder-vars-ipinfo-proxy": "IPInfo - プロキシ",
+  "abusefilter-edit-builder-vars-ipinfo-score": "IPInfo - スコア"
+}

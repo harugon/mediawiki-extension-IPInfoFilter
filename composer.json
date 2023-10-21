@@ -1,0 +1,52 @@
+{
+	"name": "harugon/ipinfo-filter",
+	"description": "",
+	"license": "GPL-2.0-or-later",
+	"type": "mediawiki-extension",
+	"authors": [
+		{
+			"name": "harugon",
+			"email": "info@harugon.com",
+			"role": "Developer"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"MediaWiki\\Extension\\IPInfoFilter\\": "src/"
+		}
+	},
+	"require-dev": {
+		"mediawiki/mediawiki-codesniffer": "41.0.0",
+		"mediawiki/mediawiki-phan-config": "0.12.0",
+		"mediawiki/minus-x": "1.1.1",
+		"php-parallel-lint/php-console-highlighter": "1.0.0",
+		"php-parallel-lint/php-parallel-lint": "1.3.2"
+	},
+	"scripts": {
+		"test": [
+			"parallel-lint . --exclude vendor --exclude node_modules",
+			"@phpcs",
+			"minus-x check ."
+		],
+		"fix": [
+			"minus-x fix .",
+			"phpcbf"
+		],
+		"phan": "phan -d . --long-progress-bar",
+		"phpcs": "phpcs -sp --cache"
+	},
+	"require": {
+		"geoip2/geoip2": "~2.0",
+		"tronovav/geoip2-update": "^2.2",
+		"php": ">=7.4",
+		"composer/installers": "^2.0"
+	},
+	"extra": {
+		"installer-name": "IPInfoFilter"
+	},
+	"config": {
+		"allow-plugins": {
+			"composer/installers": true
+		}
+	}
+}

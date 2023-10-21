@@ -1,0 +1,51 @@
+{
+	"name": "IPInfoFilter",
+	"author": [
+		"harugon"
+	],
+	"url": "https://www.mediawiki.org/wiki/Extension:IPInfoFilter",
+	"descriptionmsg": "ipinfofilter-desc",
+	"license-name": "GPL-2.0-or-later",
+	"type": "antispam",
+	"requires": {
+		"MediaWiki": ">= 1.39.0"
+	},
+	"AutoloadNamespaces": {
+		"MediaWiki\\Extension\\IPInfoFilter\\": "src/"
+	},
+	"config": {
+		"IPInfoFilterGeoLite2CountryPath": {
+			"value": false,
+			"description": "Path to the GeoLite2 Country database file."
+		},
+		"IPInfoFilterGeoLite2AsnPath": {
+			"value": false,
+			"description": "Path to the GeoLite2 ASN database file."
+		},
+		"IPInfoFilterProxyCheckIoKey": {
+			"value": false,
+			"description": "API key for accessing the ProxyCheck.io service. "
+		}
+	},
+	"HookHandlers": {
+		"IPInfoFilterHooks": {
+			"class": "MediaWiki\\Extension\\IPInfoFilter\\Hooks",
+			"services": ["IPInfoService"]
+		}
+	},
+	"Hooks": {
+		"AbuseFilter-builder": "IPInfoFilterHooks",
+		"AbuseFilter-generateUserVars": "IPInfoFilterHooks",
+		"AbuseFilter-computeVariable": "IPInfoFilterHooks"
+	},
+	"MessagesDirs": {
+		"IPInfoFilter": [
+			"i18n"
+		]
+	},
+	"load_composer_autoloader": true,
+	"ServiceWiringFiles": [
+		"src/ServiceWiring.php"
+	],
+	"manifest_version": 2
+}
