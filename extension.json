@@ -35,7 +35,7 @@
 	},
 	"Hooks": {
 		"AbuseFilter-builder": "IPInfoFilterHooks",
-		"AbuseFilter-generateUserVars": "IPInfoFilterHooks",
+		"AbuseFilter-generateGenericVars": "IPInfoFilterHooks",
 		"AbuseFilter-computeVariable": "IPInfoFilterHooks"
 	},
 	"MessagesDirs": {
