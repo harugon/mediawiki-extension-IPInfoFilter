@@ -59,6 +59,7 @@ class ProxyCheckIoService implements IPInfoServiceInterface {
 	}
 
 	public function getProxy( string $ip ): ?bool {
+		$data = $this->getProxyCheckIo( $ip );
 		if ( !isset( $data['proxy'] ) ) {
 			return null;
 		}
@@ -78,10 +79,7 @@ class ProxyCheckIoService implements IPInfoServiceInterface {
 		$para = [
 			'vpn' => 1,
 			'asn' => 1,
-			'risk' => 1,
-			'port' => 1,
-			'seen' => 1,
-			'days' => 7
+			'risk' => 1
 		];
 
 		$key = $this->config->get( 'IPInfoFilterProxyCheckIoKey' );
