@@ -59,12 +59,12 @@ class ProxyCheckIoService implements IPInfoServiceInterface {
 	}
 
 	public function getProxy( string $ip ): ?bool {
-        if (!isset($data['proxy'])) {
-            return null;
-        }
+		if ( !isset( $data['proxy'] ) ) {
+			return null;
+		}
 
-        // yes or no　
-        return strtolower($data['proxy']) === 'yes';
+		// yes or no　
+		return strtolower( $data['proxy'] ) === 'yes';
 	}
 
 	/**
