@@ -6,7 +6,9 @@ use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterBuilderHook;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterComputeVariableHook;
 use MediaWiki\Extension\AbuseFilter\Hooks\AbuseFilterGenerateGenericVarsHook;
 use MediaWiki\Extension\AbuseFilter\Variables\VariableHolder;
+use MWException;
 use RecentChange;
+use RequestContext;
 
 class Hooks implements
 	AbuseFilterComputeVariableHook,
@@ -65,11 +67,22 @@ class Hooks implements
 	}
 
 	public function onAbuseFilter_generateGenericVars( VariableHolder $vars, ?RecentChange $rc ) {
-		$ip = $rc->getAttribute( 'rc_ip' );
-		$vars->setLazyLoadVar( $this->prefix . '_service', $this->prefix . '-service', [ 'ip' => $ip ] );
-		$vars->setLazyLoadVar( $this->prefix . '_asn', $this->prefix . '-asn', [ 'ip' => $ip ] );
-		$vars->setLazyLoadVar( $this->prefix . '_country', $this->prefix . '-country', [ 'ip' => $ip ] );
-		$vars->setLazyLoadVar( $this->prefix . '_score', $this->prefix . '-score', [ 'ip' => $ip ] );
-		$vars->setLazyLoadVar( $this->prefix . '_proxy', $this->prefix . '-proxy', [ 'ip' => $ip ] );
+		$ip = $rc ? $rc->getAttribute( 'rc_ip' ) : $this->getIP();
+		if ( $ip !== null ) {
+			$vars->setLazyLoadVar( $this->prefix . '_service', $this->prefix . '-service', [ 'ip' => $ip ] );
+			$vars->setLazyLoadVar( $this->prefix . '_asn', $this->prefix . '-asn', [ 'ip' => $ip ] );
+			$vars->setLazyLoadVar( $this->prefix . '_country', $this->prefix . '-country', [ 'ip' => $ip ] );
+			$vars->setLazyLoadVar( $this->prefix . '_score', $this->prefix . '-score', [ 'ip' => $ip ] );
+			$vars->setLazyLoadVar( $this->prefix . '_proxy', $this->prefix . '-proxy', [ 'ip' => $ip ] );
+		}
+	}
+
+	public function getIP(): ?string {
+		try {
+			$request = RequestContext::getMain()->getRequest();
+			return $request->getIP();
+		} catch ( MWException $e ) {
+			return null; // 例外が発生した場合はIPアドレスを取得できないのでnullを返す
+		}
 	}
 }
